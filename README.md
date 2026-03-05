@@ -39,7 +39,7 @@ Este desafio me permitiu aprofundar em:
 ```bash
 
 javac Main.java
-
+```
 3. **Rode a aplicação:**
 
 ```bash
