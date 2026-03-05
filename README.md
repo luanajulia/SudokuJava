@@ -32,7 +32,7 @@ Este desafio me permitiu aprofundar em:
 ### Passo a Passo
 1. **Clone o repositório:**
    ```bash
-   git clone [https://github.com/luanajulia/sudoku.git](https://github.com/luanajulia/sudoku.git)
+   git clone https://github.com/luanajulia/SudokuJava.git
    
 2. **Compile o projeto:**
 
