@@ -1,8 +1,7 @@
 package br.com.dioSudoku.ui.custom.screen;
 
-import br.com.dioSudoku.model.space;
+import br.com.dioSudoku.model.Space;
 import br.com.dioSudoku.service.BoardService;
-import br.com.dioSudoku.service.EventEnum;
 import br.com.dioSudoku.service.NotifierService;
 import br.com.dioSudoku.ui.custom.buttons.CheckGameStatusButton;
 import br.com.dioSudoku.ui.custom.buttons.FinishGameButton;
@@ -60,10 +59,10 @@ public class MainScreen {
         mainFrame.repaint();
     }
 
-    private List<space> getSpacesFromSector(final List<List<space>> spaces,
+    private List<Space> getSpacesFromSector(final List<List<Space>> spaces,
                                             final int initCol, final int endCol,
                                             final int initRow, final int endRow){
-        List<space> spaceSector = new ArrayList<>();
+        List<Space> spaceSector = new ArrayList<>();
         for (int r = initRow; r <= endRow; r++) {
             for (int c = initCol; c <= endCol; c++) {
                 spaceSector.add(spaces.get(r).get(c));
@@ -72,7 +71,7 @@ public class MainScreen {
         return spaceSector;
     }
 
-    private JPanel generateSection(final List<space> spaces){
+    private JPanel generateSection(final List<Space> spaces){
         List<NumberText> fields = new ArrayList<>(spaces.stream().map(NumberText::new).toList());
         // Adiciona todos os NumberText criados à lista global
         this.allNumberFields.addAll(fields);
@@ -91,7 +90,7 @@ public class MainScreen {
                 checkGameStatusButoon.setEnabled(false);
                 finishGameButoon.setEnabled(false);
             } else {
-                List<space> errorSpaces = boardService.getErrorSpaces();
+                List<Space> errorSpaces = boardService.getErrorSpaces();
                 if (!errorSpaces.isEmpty()) {
                     highlightErrors(errorSpaces);
                     showMessageDialog(null, "Seu Jogo contém erros nas posições destacadas. Ajuste novamente!");
@@ -108,7 +107,7 @@ public class MainScreen {
             // Sempre limpa os destaques antigos antes de uma nova verificação
             clearAllErrorHighlights();
 
-            List<space> errorSpaces = boardService.getErrorSpaces();
+            List<Space> errorSpaces = boardService.getErrorSpaces();
 
             if (!errorSpaces.isEmpty()) {
                 highlightErrors(errorSpaces);
@@ -156,7 +155,7 @@ public class MainScreen {
     }
 
 
-    private void highlightErrors(List<space> errorSpaces) {
+    private void highlightErrors(List<Space> errorSpaces) {
         for (NumberText field : allNumberFields) {
             if (errorSpaces.contains(field.getAssociatedSpace())) {
                 field.highlightError();

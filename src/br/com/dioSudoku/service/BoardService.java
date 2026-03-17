@@ -2,7 +2,7 @@ package br.com.dioSudoku.service;
 
 import br.com.dioSudoku.model.Board;
 import br.com.dioSudoku.model.GameStatusEnum;
-import br.com.dioSudoku.model.space;
+import br.com.dioSudoku.model.Space;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class BoardService {
         this.board = new Board(initBoard(gameConfig));
     }
 
-    public List<List<space>> getSpaces(){
+    public List<List<Space>> getSpaces(){
         return this.board.getSpaces();
     }
 
@@ -31,7 +31,7 @@ public class BoardService {
         return !getErrorSpaces().isEmpty();
     }
 
-    public List<space> getErrorSpaces() {
+    public List<Space> getErrorSpaces() {
         return board.getSpacesWithErrors();
     }
 
@@ -43,15 +43,15 @@ public class BoardService {
         return board.isFinished();
     }
 
-    private List<List<space>> initBoard(Map<String, String> gameConfig) {
-        List<List<space>> spaces = new ArrayList<>();
+    private List<List<Space>> initBoard(Map<String, String> gameConfig) {
+        List<List<Space>> spaces = new ArrayList<>();
         for (int i = 0; i < BOARD_LIMIT; i++) {
             spaces.add(new ArrayList<>());
             for (int j = 0; j < BOARD_LIMIT; j++) {
                 var positionConfig = gameConfig.get("%s,%s".formatted(i, j));
                 var expected = Integer.parseInt(positionConfig.split(",")[0]);
                 var fixed = Boolean.parseBoolean(positionConfig.split(",")[1]);
-                var currentSpace = new space(expected, fixed);
+                var currentSpace = new Space(expected, fixed);
                 spaces.get(i).add(currentSpace);
             }
         }

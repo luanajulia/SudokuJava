@@ -1,11 +1,8 @@
 package br.com.dioSudoku;
 
-import br.com.dioSudoku.ui.custom.frame.MainFrame;
-import br.com.dioSudoku.ui.custom.panel.MainPanel;
 import br.com.dioSudoku.ui.custom.screen.MainScreen;
 
-import javax.swing.*;
-import java.awt.*;
+
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 

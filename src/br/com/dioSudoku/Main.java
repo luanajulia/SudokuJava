@@ -1,7 +1,7 @@
 package br.com.dioSudoku;
 
 import br.com.dioSudoku.model.Board;
-import br.com.dioSudoku.model.space;
+import br.com.dioSudoku.model.Space;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,27 +59,37 @@ public class Main {
         }
     }
     private static void startGame(Map<String, String> positions) {
-        if (nonNull(board)){
-            System.out.println("O jogo já foi iniciado");
-            return;
-        }
-
-        List<List<space>> spaces = new ArrayList<>();
-        for (int i = 0; i < BOARD_LIMIT; i++) {
-            spaces.add(new ArrayList<>());
-            for (int j = 0; j < BOARD_LIMIT; j++) {
-                var positionConfig = positions.get("%s,%s".formatted(i, j));
-                var expected = Integer.parseInt(positionConfig.split(",")[0]);
-                var fixed = Boolean.parseBoolean(positionConfig.split(",")[1]);
-                var currentSpace = new space(expected, fixed);
-                spaces.get(i).add(currentSpace);
-            }
-        }
-
-        board = new Board(spaces);
-        System.out.println("O jogo está pronto para começar");
+    if (nonNull(board)) {
+        System.out.println("O jogo já foi iniciado");
+        return;
     }
 
+    List<List<Space>> spaces = new ArrayList<>();
+    for (int i = 0; i < BOARD_LIMIT; i++) {
+        spaces.add(new ArrayList<>());
+        for (int j = 0; j < BOARD_LIMIT; j++) {
+            // Busca a configuração para a posição atual
+            var positionConfig = positions.get("%s,%s".formatted(i, j));
+            
+            Space currentSpace;
+            if (nonNull(positionConfig)) {
+                // Se existe configuração, corta a String e transforma nos tipos corretos
+                String[] parts = positionConfig.split(",");
+                var expected = Integer.parseInt(parts[0]);
+                var fixed = Boolean.parseBoolean(parts[1]);
+                currentSpace = new Space(expected, fixed);
+            } else {
+                // Se não existe (null), cria um espaço vazio padrão
+                currentSpace = new Space(0, false);
+            }
+            
+            spaces.get(i).add(currentSpace);
+        }
+    }
+
+    board = new Board(spaces);
+    System.out.println("O jogo está pronto para começar");
+}
     private static void inputNumber() {
         if (isNull(board)){
             System.out.println("O jogo ainda não foi iniciado ");

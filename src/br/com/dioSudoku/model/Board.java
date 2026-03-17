@@ -8,13 +8,13 @@ import static java.util.Objects.nonNull;
 
 public class Board {
 
-    private final List<List<space>> spaces;
+    private final List<List<Space>> spaces;
 
-    public Board(List<List<space>> spaces) {
+    public Board(List<List<Space>> spaces) {
         this.spaces = spaces;
     }
 
-    public List<List<space>> getSpaces() {
+    public List<List<Space>> getSpaces() {
         return spaces;
     }
 
@@ -53,19 +53,19 @@ public class Board {
     }
 
     public void reset(){
-        spaces.forEach(c -> c.forEach(space::clearSpace));
+        spaces.forEach(c -> c.forEach(Space::clearSpace));
     }
 
     public boolean isFinished(){
         return !hasError() && getStatus() == COMPLETE;
     }
 
-    public List<space> getSpacesWithErrors() {
-        Set<space> uniqueErrorSpaces = new HashSet<>();
+    public List<Space> getSpacesWithErrors() {
+        Set<Space> uniqueErrorSpaces = new HashSet<>();
         for (int r = 0; r < 9; r++) {
             Set<Integer> seenValuesInRow = new HashSet<>();
             for (int c = 0; c < 9; c++) {
-                space currentSpace = spaces.get(r).get(c);
+                Space currentSpace = spaces.get(r).get(c);
                 Integer value = currentSpace.getActual();
                 if (value != null && value != 0) {
                     if (seenValuesInRow.contains(value)) {
@@ -84,7 +84,7 @@ public class Board {
         for (int c = 0; c < 9; c++) {
             Set<Integer> seenValuesInCol = new HashSet<>();
             for (int r = 0; r < 9; r++) {
-                space currentSpace = spaces.get(r).get(c);
+                Space currentSpace = spaces.get(r).get(c);
                 Integer value = currentSpace.getActual();
 
                 if (value != null && value != 0) {
@@ -106,7 +106,7 @@ public class Board {
                 Set<Integer> seenValuesInBlock = new HashSet<>();
                 for (int r = blockRow * 3; r < (blockRow * 3) + 3; r++) {
                     for (int c = blockCol * 3; c < (blockCol * 3) + 3; c++) {
-                        space currentSpace = spaces.get(r).get(c);
+                        Space currentSpace = spaces.get(r).get(c);
                         Integer value = currentSpace.getActual();
 
                         if (value != null && value != 0) {

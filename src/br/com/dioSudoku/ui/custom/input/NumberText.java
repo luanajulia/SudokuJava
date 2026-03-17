@@ -1,6 +1,6 @@
 package br.com.dioSudoku.ui.custom.input;
 
-import br.com.dioSudoku.model.space;
+import br.com.dioSudoku.model.Space;
 import br.com.dioSudoku.service.EventEnum;
 import br.com.dioSudoku.service.EventListener;
 
@@ -13,12 +13,12 @@ import static br.com.dioSudoku.service.EventEnum.CLEAR_SPACE;
 
 public class NumberText extends JTextField implements EventListener {
 
-    private final space space;
+    private final Space space;
     private final Color originalBackground;
     private final Color fixedValueBackground = new Color(240, 240, 240);
     private final Color errorBackground = new Color(255, 200, 200);
 
-    public NumberText(final space space) {
+    public NumberText(final Space space) {
         this.space = space;
         var dimension = new Dimension(50, 50);
         this.setSize(dimension);
@@ -77,7 +77,7 @@ public class NumberText extends JTextField implements EventListener {
         });
     }
 
-    public space getAssociatedSpace() {
+    public Space getAssociatedSpace() {
         return this.space;
     }
 
